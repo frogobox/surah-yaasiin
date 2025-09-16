@@ -3,8 +3,8 @@ package com.frogobox.kickstart.util
 import android.content.Context
 import com.frogobox.kickstart.R
 import com.frogobox.kickstart.common.ext.getRawResources
-import com.frogobox.kickstart.domain.model.ModelAyat
-import com.frogobox.kickstart.domain.model.ModelSurah
+import com.frogobox.kickstart.domain.model.AyatModel
+import com.frogobox.kickstart.domain.model.SurahModel
 
 
 /**
@@ -15,9 +15,9 @@ import com.frogobox.kickstart.domain.model.ModelSurah
  */
 object RawParser {
 
-    fun ayat(context: Context): MutableList<ModelAyat> {
+    fun ayat(context: Context): MutableList<AyatModel> {
         val reader = context.getRawResources(R.raw.ayat)
-        val ayatList: MutableList<ModelAyat> = ArrayList()
+        val ayatList: MutableList<AyatModel> = ArrayList()
 
         var rawAyat: String?
 
@@ -25,7 +25,7 @@ object RawParser {
             val rawAyats: Array<String?> =
                 rawAyat!!.split("//".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
             ayatList.add(
-                ModelAyat(
+                AyatModel(
                     rawAyats[0],
                     rawAyats[1],
                     rawAyats[2],
@@ -38,9 +38,9 @@ object RawParser {
         return ayatList
     }
 
-    fun surah(context: Context): MutableList<ModelSurah> {
+    fun surah(context: Context): MutableList<SurahModel> {
         val reader = context.getRawResources(R.raw.surah)
-        val surahList: MutableList<ModelSurah> = ArrayList()
+        val surahList: MutableList<SurahModel> = ArrayList()
 
         var rawSurah: String?
         while ((reader.readLine().also { rawSurah = it }) != null) {
@@ -51,12 +51,12 @@ object RawParser {
                 continue
             }
             surahList.add(
-                ModelSurah(
+                SurahModel(
                     rawSurahs[0],
                     rawSurahs[1],
                     rawSurahs[2],
                     rawSurahs[3],
-                    rawSurahs[4]
+                    rawSurahs[4],
                 )
             )
         }

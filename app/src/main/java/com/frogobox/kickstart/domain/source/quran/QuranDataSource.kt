@@ -2,8 +2,8 @@ package com.frogobox.kickstart.domain.source.quran
 
 import android.content.Context
 import com.frogobox.kickstart.common.callback.Resource
-import com.frogobox.kickstart.domain.model.ModelAyat
-import com.frogobox.kickstart.domain.model.ModelSurah
+import com.frogobox.kickstart.domain.model.AyatModel
+import com.frogobox.kickstart.domain.model.SurahModel
 import com.frogobox.kickstart.util.RawParser
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -25,14 +25,18 @@ import javax.inject.Singleton
 
 @Singleton
 class QuranDataSource @Inject constructor(
-    @param:ApplicationContext private val context: Context
+    @param:ApplicationContext private val context: Context,
 ) {
 
-    fun getSurahs(): Flow<Resource<MutableList<ModelSurah>>> =
+    fun getSurahs(surah: String? = null): Flow<Resource<MutableList<SurahModel>>> =
         flow {
             try {
                 emit(Resource.Loading())
-                val response = RawParser.surah(context)
+                val response = if (!surah.isNullOrEmpty()) {
+                    RawParser.surah(context).filter { it.ayat?.contains(surah) == true }.toMutableList()
+                } else {
+                    RawParser.surah(context)
+                }
                 if (response.isEmpty()) {
                     emit(Resource.Error("Data not found"))
                 } else {
@@ -44,7 +48,7 @@ class QuranDataSource @Inject constructor(
         }.flowOn(Dispatchers.IO)
 
 
-    fun getAyats(surah: String): Flow<Resource<MutableList<ModelAyat>>> =
+    fun getAyats(surah: String): Flow<Resource<MutableList<AyatModel>>> =
         flow {
             try {
                 emit(Resource.Loading())

@@ -6,7 +6,7 @@ import com.frogobox.kickstart.common.base.BaseAdapter
 import com.frogobox.kickstart.common.base.BaseViewHolder
 import com.frogobox.kickstart.common.callback.OnItemClickCallback
 import com.frogobox.kickstart.databinding.ItemAyatBinding
-import com.frogobox.kickstart.domain.model.ModelAyat
+import com.frogobox.kickstart.domain.model.AyatModel
 
 /**
  * Created by faisalamircs on 16/09/2025
@@ -18,7 +18,7 @@ import com.frogobox.kickstart.domain.model.ModelAyat
  */
 
 
-class AyatAdapter : BaseAdapter<ModelAyat, AyatAdapter.AyatHolder>() {
+class AyatAdapter : BaseAdapter<AyatModel, AyatAdapter.AyatHolder>() {
 
     override fun bindVH(
         holder: AyatHolder,
@@ -28,15 +28,15 @@ class AyatAdapter : BaseAdapter<ModelAyat, AyatAdapter.AyatHolder>() {
     }
 
     override fun adapterAreItemsTheSame(
-        oldItem: ModelAyat,
-        newItem: ModelAyat,
+        oldItem: AyatModel,
+        newItem: AyatModel,
     ): Boolean {
         return oldItem.ayat == newItem.ayat
     }
 
     override fun adapterAreContentsTheSame(
-        oldItem: ModelAyat,
-        newItem: ModelAyat,
+        oldItem: AyatModel,
+        newItem: AyatModel,
     ): Boolean {
         return oldItem == newItem
     }
@@ -58,9 +58,9 @@ class AyatAdapter : BaseAdapter<ModelAyat, AyatAdapter.AyatHolder>() {
     inner class AyatHolder(
         private val binding: ItemAyatBinding,
         private val onItemClickCallback: OnItemClickCallback? = null,
-    ) : BaseViewHolder<ModelAyat>(binding.root) {
+    ) : BaseViewHolder<AyatModel>(binding.root) {
 
-        override fun bindData(model: ModelAyat, position: Int?) {
+        override fun bindData(model: AyatModel, position: Int?) {
             binding.apply {
                 rowAyat.text = model.ayat
                 rowArabic.text = model.arab
