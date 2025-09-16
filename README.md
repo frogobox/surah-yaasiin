@@ -1,4 +1,4 @@
-## Quran Android
+## Surah Yasin Android
 
 ## About This Project
 [![Android-CI](https://github.com/frogobox/frogo-kick-start-android/actions/workflows/android-ci.yml/badge.svg)](https://github.com/frogobox/frogo-kick-start-android/actions/workflows/android-ci.yml)

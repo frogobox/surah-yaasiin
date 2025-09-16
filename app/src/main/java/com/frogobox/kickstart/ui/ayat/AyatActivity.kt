@@ -60,15 +60,8 @@ class AyatActivity : BaseActivity<ActivityAyatBinding>() {
     override fun onCreateExt(savedInstanceState: Bundle?) {
         super.onCreateExt(savedInstanceState)
 
-        val extra = getExtraExt<SurahModel>(EXTRA_DATA)
-
-        extra.surah?.let {
-            viewModel.getAyats(it)
-        }
-
-        extra.ayat?.let {
-            setupDetailActivity(it)
-        }
+        setupDetailActivity("Yaa Siin")
+        viewModel.getAyats("36")
 
         binding.apply {
             rv.adapter = AyatAdapter

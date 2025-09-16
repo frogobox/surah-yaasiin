@@ -14,7 +14,7 @@
 object ProjectSetting {
 
     // Project settings
-    const val NAME_APP = "Quran Android"
+    const val NAME_APP = "Surah Yaa Siin"
 
     const val APP_DOMAIN = "com"
     const val APP_PLAY_CONSOLE = "frogobox"
