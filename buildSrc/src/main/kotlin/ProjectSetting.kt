@@ -14,7 +14,7 @@
 object ProjectSetting {
 
     // Project settings
-    const val NAME_APP = "Frogo Kick Start Project"
+    const val NAME_APP = "Quran Android"
 
     const val APP_DOMAIN = "com"
     const val APP_PLAY_CONSOLE = "frogobox"

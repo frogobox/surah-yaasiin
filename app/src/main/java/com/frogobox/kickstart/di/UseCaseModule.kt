@@ -2,6 +2,8 @@ package com.frogobox.kickstart.di
 
 import com.frogobox.kickstart.domain.source.meal.usecase.MealInteractor
 import com.frogobox.kickstart.domain.source.meal.usecase.MealUseCase
+import com.frogobox.kickstart.domain.source.quran.usecase.QuranInteractor
+import com.frogobox.kickstart.domain.source.quran.usecase.QuranUseCase
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,5 +27,9 @@ abstract class UseCaseModule {
     @Binds
     @ViewModelScoped
     abstract fun provideMealUseCase(useCase: MealInteractor): MealUseCase
+
+    @Binds
+    @ViewModelScoped
+    abstract fun provideQuranUseCase(useCase: QuranInteractor): QuranUseCase
 
 }
