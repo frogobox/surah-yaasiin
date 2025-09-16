@@ -13,7 +13,7 @@ This Is Latest Release (Still Being Developed)
 ## Screenshoot Apps
 |                             UI 1                             |                             UI 2                             | 
 |:------------------------------------------------------------:|:------------------------------------------------------------:|
-| <img width="200px" height="360px" src="docs/image/ss_1.jpg"> | <img width="200px" height="360px" src="docs/image/ss_2.jpg"> |
+| <img width="200px" height="480px" src="docs/image/ss_1.jpg"> | <img width="200px" height="480px" src="docs/image/ss_2.jpg"> |
 
 ## Architecture
 -   Pattern  [Model-View-ViewModel](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)  (MVVM) facilitating a [separation](https://en.wikipedia.org/wiki/Separation_of_concerns) of development of the graphical user interface.
