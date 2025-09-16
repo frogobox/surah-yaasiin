@@ -2,6 +2,8 @@ package com.frogobox.kickstart.di
 
 import com.frogobox.kickstart.domain.source.meal.repository.MealRepository
 import com.frogobox.kickstart.domain.source.meal.repository.MealRepositoryImpl
+import com.frogobox.kickstart.domain.source.quran.repository.QuranRepository
+import com.frogobox.kickstart.domain.source.quran.repository.QuranRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -23,5 +25,8 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideMealRepository(repository: MealRepositoryImpl): MealRepository
+
+    @Binds
+    abstract fun provideQuranRepository(repository: QuranRepositoryImpl): QuranRepository
 
 }
