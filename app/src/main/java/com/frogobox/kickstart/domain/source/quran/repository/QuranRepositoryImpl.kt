@@ -1,9 +1,8 @@
 package com.frogobox.kickstart.domain.source.quran.repository
 
-import android.content.Context
 import com.frogobox.kickstart.common.callback.Resource
-import com.frogobox.kickstart.domain.model.ModelAyat
-import com.frogobox.kickstart.domain.model.ModelSurah
+import com.frogobox.kickstart.domain.model.AyatModel
+import com.frogobox.kickstart.domain.model.SurahModel
 import com.frogobox.kickstart.domain.source.quran.QuranDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -23,8 +22,8 @@ class QuranRepositoryImpl @Inject constructor(
     private val dataSource: QuranDataSource,
 ) : QuranRepository {
 
-    override fun getSurahs(): Flow<Resource<MutableList<ModelSurah>>> {
-        return dataSource.getSurahs().map {
+    override fun getSurahs(surah: String?): Flow<Resource<MutableList<SurahModel>>> {
+        return dataSource.getSurahs(surah).map {
             return@map when (it) {
                 is Resource.Success -> Resource.Success(it.data ?: mutableListOf())
                 is Resource.Error -> Resource.Error(it.message.toString())
@@ -33,7 +32,7 @@ class QuranRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getAyats(surah: String): Flow<Resource<MutableList<ModelAyat>>> {
+    override fun getAyats(surah: String): Flow<Resource<MutableList<AyatModel>>> {
         return dataSource.getAyats(surah).map {
             return@map when (it) {
                 is Resource.Success -> Resource.Success(it.data ?: mutableListOf())

@@ -10,8 +10,8 @@ import com.frogobox.kickstart.common.base.BaseActivity
 import com.frogobox.kickstart.common.callback.OnItemClickCallback
 import com.frogobox.kickstart.common.callback.Resource
 import com.frogobox.kickstart.databinding.ActivityAyatBinding
-import com.frogobox.kickstart.domain.model.ModelAyat
-import com.frogobox.kickstart.domain.model.ModelSurah
+import com.frogobox.kickstart.domain.model.AyatModel
+import com.frogobox.kickstart.domain.model.SurahModel
 import com.frogobox.sdk.ext.getExtraExt
 import com.frogobox.sdk.ext.gone
 import com.frogobox.sdk.ext.showToast
@@ -35,13 +35,13 @@ class AyatActivity : BaseActivity<ActivityAyatBinding>() {
     companion object {
         const val EXTRA_DATA = "EXTRA_DATA"
 
-        fun createIntent(context: Context, data: ModelSurah): Intent {
+        fun createIntent(context: Context, data: SurahModel): Intent {
             return Intent(context, AyatActivity::class.java).apply {
                 putExtra(EXTRA_DATA, data.toJson())
             }
         }
 
-        fun launch(context: Context, data: ModelSurah) {
+        fun launch(context: Context, data: SurahModel) {
             context.startActivity(createIntent(context, data))
         }
 
@@ -60,10 +60,15 @@ class AyatActivity : BaseActivity<ActivityAyatBinding>() {
     override fun onCreateExt(savedInstanceState: Bundle?) {
         super.onCreateExt(savedInstanceState)
 
-        val extra = getExtraExt<ModelSurah>(EXTRA_DATA)
-        viewModel.getAyats(extra.surah)
+        val extra = getExtraExt<SurahModel>(EXTRA_DATA)
 
-        setupDetailActivity(extra.ayat)
+        extra.surah?.let {
+            viewModel.getAyats(it)
+        }
+
+        extra.ayat?.let {
+            setupDetailActivity(it)
+        }
 
         binding.apply {
             rv.adapter = AyatAdapter
@@ -77,7 +82,7 @@ class AyatActivity : BaseActivity<ActivityAyatBinding>() {
                     objects: Any,
                     position: Int?,
                 ) {
-                    (objects as ModelAyat).let {
+                    (objects as AyatModel).let {
 
                     }
                 }

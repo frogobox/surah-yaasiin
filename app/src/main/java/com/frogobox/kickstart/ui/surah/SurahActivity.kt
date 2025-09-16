@@ -1,6 +1,8 @@
 package com.frogobox.kickstart.ui.surah
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,7 +10,7 @@ import com.frogobox.kickstart.common.base.BaseActivity
 import com.frogobox.kickstart.common.callback.OnItemClickCallback
 import com.frogobox.kickstart.common.callback.Resource
 import com.frogobox.kickstart.databinding.ActivitySurahBinding
-import com.frogobox.kickstart.domain.model.ModelSurah
+import com.frogobox.kickstart.domain.model.SurahModel
 import com.frogobox.kickstart.ui.ayat.AyatActivity
 import com.frogobox.sdk.ext.gone
 import com.frogobox.sdk.ext.showToast
@@ -53,9 +55,18 @@ class SurahActivity : BaseActivity<ActivitySurahBinding>() {
                     objects: Any,
                     position: Int?,
                 ) {
-                    (objects as ModelSurah).let {
+                    (objects as SurahModel).let {
                         startActivityResultExt(AyatActivity.createIntent(this@SurahActivity, it))
                     }
+                }
+            })
+
+            etSearch.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(p0: Editable?) {}
+                override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+                override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    val query = p0.toString()
+                    viewModel.getSurahs(query)
                 }
             })
 

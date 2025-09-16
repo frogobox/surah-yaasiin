@@ -1,11 +1,9 @@
 package com.frogobox.kickstart.domain.source.quran.usecase
 
-import android.content.Context
 import com.frogobox.kickstart.common.callback.Resource
-import com.frogobox.kickstart.domain.model.ModelAyat
-import com.frogobox.kickstart.domain.model.ModelSurah
+import com.frogobox.kickstart.domain.model.AyatModel
+import com.frogobox.kickstart.domain.model.SurahModel
 import com.frogobox.kickstart.domain.source.quran.repository.QuranRepository
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -23,11 +21,11 @@ class QuranInteractor @Inject constructor(
     private val repository: QuranRepository,
 ) : QuranUseCase {
 
-    override fun getSurahs(): Flow<Resource<MutableList<ModelSurah>>> {
-        return repository.getSurahs()
+    override fun getSurahs(surah: String?): Flow<Resource<MutableList<SurahModel>>> {
+        return repository.getSurahs(surah)
     }
 
-    override fun getAyats(surah: String): Flow<Resource<MutableList<ModelAyat>>> {
+    override fun getAyats(surah: String): Flow<Resource<MutableList<AyatModel>>> {
         return repository.getAyats(surah)
     }
 
