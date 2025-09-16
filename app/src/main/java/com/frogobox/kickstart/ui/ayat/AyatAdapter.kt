@@ -1,16 +1,15 @@
-package com.frogobox.kickstart.ui.main
+package com.frogobox.kickstart.ui.ayat
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.frogobox.kickstart.common.base.BaseAdapter
 import com.frogobox.kickstart.common.base.BaseViewHolder
 import com.frogobox.kickstart.common.callback.OnItemClickCallback
-import com.frogobox.kickstart.databinding.ContentArticleVerticalBinding
-import com.frogobox.kickstart.domain.model.MealModel
-import com.frogobox.sdk.ext.setImageExt
+import com.frogobox.kickstart.databinding.ItemAyatBinding
+import com.frogobox.kickstart.domain.model.ModelAyat
 
 /**
- * Created by faisalamircs on 10/09/2025
+ * Created by faisalamircs on 16/09/2025
  * -----------------------------------------
  * Name     : Muhammad Faisal Amir
  * E-mail   : faisalamircs@gmail.com
@@ -19,25 +18,25 @@ import com.frogobox.sdk.ext.setImageExt
  */
 
 
-class MainAdapter : BaseAdapter<MealModel, MainAdapter.MainHolder>() {
+class AyatAdapter : BaseAdapter<ModelAyat, AyatAdapter.AyatHolder>() {
 
     override fun bindVH(
-        holder: MainHolder,
+        holder: AyatHolder,
         position: Int,
     ) {
         holder.bindData(asyncListDiffer.currentList[position], position)
     }
 
     override fun adapterAreItemsTheSame(
-        oldItem: MealModel,
-        newItem: MealModel,
+        oldItem: ModelAyat,
+        newItem: ModelAyat,
     ): Boolean {
-        return oldItem.idMeal == newItem.idMeal
+        return oldItem.ayat == newItem.ayat
     }
 
     override fun adapterAreContentsTheSame(
-        oldItem: MealModel,
-        newItem: MealModel,
+        oldItem: ModelAyat,
+        newItem: ModelAyat,
     ): Boolean {
         return oldItem == newItem
     }
@@ -45,9 +44,9 @@ class MainAdapter : BaseAdapter<MealModel, MainAdapter.MainHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
-    ): MainHolder {
-        return MainHolder(
-            binding = ContentArticleVerticalBinding.inflate(
+    ): AyatHolder {
+        return AyatHolder(
+            binding = ItemAyatBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
@@ -56,17 +55,16 @@ class MainAdapter : BaseAdapter<MealModel, MainAdapter.MainHolder>() {
         )
     }
 
-    inner class MainHolder(
-        private val binding: ContentArticleVerticalBinding,
+    inner class AyatHolder(
+        private val binding: ItemAyatBinding,
         private val onItemClickCallback: OnItemClickCallback? = null,
-    ) : BaseViewHolder<MealModel>(binding.root) {
+    ) : BaseViewHolder<ModelAyat>(binding.root) {
 
-        override fun bindData(model: MealModel, position: Int?) {
+        override fun bindData(model: ModelAyat, position: Int?) {
             binding.apply {
-                ivUrl.setImageExt(model.strMealThumb)
-                tvTitle.text = model.strMeal
-                tvDescription.text = model.strCategory
-                tvPublished.text = model.strArea
+                rowAyat.text = model.ayat
+                rowArabic.text = model.arab
+                rowTerjemahan.text = model.terjemahanIndonesia
 
                 root.setOnClickListener { v ->
                     onItemClickCallback?.onItemClick(v, model, position)
